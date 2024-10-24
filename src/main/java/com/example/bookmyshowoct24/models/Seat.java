@@ -7,11 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "seats")
 public class Seat extends BaseModel {
     private String seatNumber;
-    private int rowNumber;
-    private int colNumber;
+    private int rowValue;
+    private int colValue;
 
     @ManyToOne
     private SeatType seatType;

@@ -1,7 +1,6 @@
 package com.example.bookmyshowoct24.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "shows")
 public class Show extends BaseModel {
     @ManyToOne
     private Movie movie;
@@ -20,6 +19,8 @@ public class Show extends BaseModel {
     @ManyToOne
     private Screen screen;
 
+    @Enumerated(EnumType.ORDINAL)
+    @ElementCollection
     private List<Feature> features;
 }
 

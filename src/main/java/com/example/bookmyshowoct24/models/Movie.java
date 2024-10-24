@@ -4,11 +4,9 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
-@Entity
+@Entity(name = "movies")
 public class Movie extends BaseModel {
     private String movie;
     // private List<Actor> cast;
