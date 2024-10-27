@@ -3,6 +3,7 @@ package com.example.bookmyshowoct24.services;
 import com.example.bookmyshowoct24.exceptions.ShowSeatNotFoundException;
 import com.example.bookmyshowoct24.exceptions.UserNotFoundException;
 import com.example.bookmyshowoct24.models.*;
+import com.example.bookmyshowoct24.repositories.BookingRepository;
 import com.example.bookmyshowoct24.repositories.ShowSeatRepository;
 import com.example.bookmyshowoct24.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,16 @@ public class BookingService {
     private UserRepository userRepository;
     private ShowSeatRepository showSeatRepository;
     private PriceCalculatorService priceCalculatorService;
+    private BookingRepository bookingRepository;
 
     public BookingService(UserRepository userRepository,
                           ShowSeatRepository showSeatRepository,
-                          PriceCalculatorService priceCalculatorService) {
+                          PriceCalculatorService priceCalculatorService,
+                          BookingRepository bookingRepository) {
         this.userRepository = userRepository;
         this.showSeatRepository = showSeatRepository;
         this.priceCalculatorService = priceCalculatorService;
+        this.bookingRepository = bookingRepository;
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
@@ -59,7 +63,7 @@ public class BookingService {
         booking.setUser(user);
         booking.setAmount(priceCalculatorService.calculatePrice(savedShowSeats));
 
-        return booking;
+        return bookingRepository.save(booking);
     }
 }
 

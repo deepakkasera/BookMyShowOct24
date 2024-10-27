@@ -16,7 +16,6 @@ public class Theatre extends BaseModel {
     private String address;
 
     @OneToMany
-    @JoinColumn(name = "theatreId")
     private List<Screen> screens;
 }
 
